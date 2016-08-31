@@ -10,10 +10,18 @@ strMsg = rosmessage(speechpub);
 imagesub = rossubscriber('/nao_camera/image_raw', rostype.sensor_msgs_Image);
 
 data = imagesub.LatestMessage;
-[img,alpha] = readImage(data);
+
+stat=-1;
+
+while(stat ~=0)
+    [img,alpha] = readImage(data);
+    [name, tst, stat] = faceRecognition(img);
+    if (stat ==0)
+        break; 
+    end
+end
 
 nameset;
-name = faceRecognition(img);
 
 strMsg.Data = sprintf('hello %s', name);
 send(speechpub, strMsg);
