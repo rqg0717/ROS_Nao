@@ -1,4 +1,4 @@
-function [name, personLabel, stat   ] = faceRecognition(videoFrame)
+function [name, personLabel, stat] = faceRecognition(videoFrame)
 % Create a cascade detector object.
 load faceClassifier;
 faceDetector = vision.CascadeObjectDetector();
